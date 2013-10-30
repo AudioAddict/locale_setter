@@ -2,11 +2,8 @@ require 'rails/railtie'
 
 module LocaleSetter
   class Railtie < Rails::Railtie
-    config.after_initialize do |app|
-      # I would prefer to do this in an initializer block, but it's important
-      # that we do this _before_ any of the user's authentication stuff
-      # happens. So this is the best we can get for now.
-      ApplicationController.send(:include, LocaleSetter::Controller)
+    ActiveSupport.on_load :action_controller do
+      include LocaleSetter::Controller
     end
   end
   module Rails

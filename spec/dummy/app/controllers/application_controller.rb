@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_user
+  prepend_before_filter :set_user
 
   def current_user
     @current_user
